@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bashbuddy"
+version = "0.1.0"
+description = "Hook an LLM up to a Bash terminal"
+authors = ["Omegastick <isaac@poulton.dev>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "bashbuddy"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.0.123"
+typer = "^0.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+bashbuddy = "bashbuddy.__main__:app"
