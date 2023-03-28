@@ -14,7 +14,6 @@ SUFFIX = (
 
 
 def create_agent_executor(tools: list[Tool], model: str) -> AgentExecutor:
-    print(model)
     llm = ChatOpenAI(temperature=0, model=model)
     agent = ChatAgent.from_llm_and_tools(llm=llm, tools=tools, suffix=SUFFIX)
     executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)

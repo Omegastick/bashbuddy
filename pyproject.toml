@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bashbuddy"
-version = "0.2.0"
+version = "0.2.1"
 description = "Hook an LLM up to a Bash terminal"
 authors = ["Omegastick <isaac@poulton.dev>"]
 license = "MIT"
