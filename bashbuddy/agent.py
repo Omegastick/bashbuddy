@@ -2,6 +2,7 @@ from langchain.agents import AgentExecutor, Tool
 from langchain.agents.chat.base import ChatAgent
 from langchain.chat_models import ChatOpenAI
 
+from bashbuddy.config import load_config
 from bashbuddy.persistent_bash import PersistentBash
 
 SUFFIX = (
@@ -12,8 +13,9 @@ SUFFIX = (
 )
 
 
-def create_agent_executor(tools: list[Tool]) -> AgentExecutor:
-    llm = ChatOpenAI(temperature=0)
+def create_agent_executor(tools: list[Tool], model: str) -> AgentExecutor:
+    print(model)
+    llm = ChatOpenAI(temperature=0, model=model)
     agent = ChatAgent.from_llm_and_tools(llm=llm, tools=tools, suffix=SUFFIX)
     executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)
 
@@ -21,6 +23,8 @@ def create_agent_executor(tools: list[Tool]) -> AgentExecutor:
 
 
 def run_agent(command: str) -> str:
+    config = load_config()
+
     with PersistentBash() as bash:
         bash_tool = Tool(
             name="Bash",
@@ -30,7 +34,7 @@ def run_agent(command: str) -> str:
             ),
             func=bash.run,
         )
-        executor = create_agent_executor(tools=[bash_tool])
+        executor = create_agent_executor(tools=[bash_tool], model=config.model)
         output = executor.run(command)
 
     return output

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bashbuddy"
-version = "0.1.0"
+version = "0.2.0"
 description = "Hook an LLM up to a Bash terminal"
 authors = ["Omegastick <isaac@poulton.dev>"]
 license = "MIT"
@@ -11,6 +11,7 @@ packages = [{include = "bashbuddy"}]
 python = "^3.11"
 langchain = "^0.0.123"
 typer = "^0.7.0"
+platformdirs = "^3.2.0"
 
 
 [build-system]

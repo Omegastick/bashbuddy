@@ -18,10 +18,20 @@ Or
 pip install -e .
 ```
 
+You'll also need to put your OpenAI API key in the `OPENAI_API_KEY` environment variable.
+
 ## Usage
 
 ```
 bashbuddy "<command>"
+```
+
+## Configuration
+
+You can change the model used by setting the `BASHBUDDY_MODEL` environment variable or setting it in `~/.config/bashbuddy/config.toml`:
+
+```toml
+model = "gpt-4"  # defaults to gpt-3.5-turbo
 ```
 
 ## Example
