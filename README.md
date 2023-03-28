@@ -9,13 +9,13 @@ It's recommended to run bashbuddy in a VM. It's perfectly capable of running `rm
 ## Installation
 
 ```
+pip install bashbuddy
+```
+
+Or clone the repository and run:
+
+```
 poetry install
-```
-
-Or
-
-```
-pip install -e .
 ```
 
 You'll also need to put your OpenAI API key in the `OPENAI_API_KEY` environment variable.
