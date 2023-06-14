@@ -22,8 +22,31 @@ You'll also need to put your OpenAI API key in the `OPENAI_API_KEY` environment 
 
 ## Usage
 
+You can directly give bashbuddy a command with this:
 ```
-bashbuddy "<command>"
+bashbuddy -c "<command>"
+```
+
+Or, you can create a "script" for bashbuddy by creating a file with a shebang like this:
+```
+#!/usr/bin/env bashbuddy
+
+<command>
+```
+
+Then, make it executable and run it:
+```
+chmod +x <file>
+./<file>
+```
+
+Or you can run it with `bashbuddy <file>`.
+
+`.bb` is just a convention, you can use whatever extension you want. bashbuddy files like this are kind of like *"plain english shell scripts"*. They're super useful for quickly automating complex tasks that would normally require a lot of specicifity, edge case handling, or error handling. As an example:
+```
+#!/usr/bin/env bashbuddy
+
+Pick a random image from my wallpapers directory and set it as my wallpaper. I don't remember where the directory is, but it's probably somewhere in /home/omegastick. I use `feh` to set my wallpapers.
 ```
 
 ## Configuration
@@ -38,8 +61,9 @@ OpenAI's agent functions are supported, and will automatically be used if one of
 
 ## Example
 
+### Manual command
 ````
-$ bashbuddy "Make a new directory called 'test', then put 3 files in it, each containing a haiku. The file name should be the title of the poem."
+$ bashbuddy -c "Make a new directory called 'test', then put 3 files in it, each containing a haiku. The file name should be the title of the poem."
 
 
 > Entering new AgentExecutor chain...
@@ -102,3 +126,19 @@ Winter solitude -
 in a world of one color
 the sound of wind.
 ````
+
+### Command from a file
+```
+$ cat test.bb
+#!/usr/bin/env bashbuddy
+
+Make a new directory called 'test', then put 3 files in it, each containing a haiku. The file name should be the title of the poem.
+
+$ chmod +x test.bb
+$ ./test.bb
+
+
+> Entering new AgentExecutor chain...
+Question: What is the task?
+...
+```
