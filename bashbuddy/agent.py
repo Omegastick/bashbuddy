@@ -1,5 +1,8 @@
-from langchain.agents import AgentExecutor, Tool
+from typing import Type
+
+from langchain.agents import AgentExecutor, BaseSingleActionAgent, Tool
 from langchain.agents.chat.base import ChatAgent
+from langchain.agents.openai_functions_agent.base import OpenAIFunctionsAgent
 from langchain.chat_models import ChatOpenAI
 
 from bashbuddy.config import load_config
@@ -14,9 +17,16 @@ SUFFIX = (
 )
 
 
+def get_agent_class(model_name: str) -> Type[BaseSingleActionAgent]:
+    if model_name.endswith("-0613"):
+        return OpenAIFunctionsAgent
+    return ChatAgent
+
+
 def create_agent_executor(tools: list[Tool], model: str) -> AgentExecutor:
     llm = ChatOpenAI(model_name=model, temperature=0.0)  # type: ignore
-    agent = ChatAgent.from_llm_and_tools(llm=llm, tools=tools, suffix=SUFFIX)
+    agent_class = get_agent_class(model)
+    agent = agent_class.from_llm_and_tools(llm=llm, tools=tools, suffix=SUFFIX)
     executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)
     return executor
 

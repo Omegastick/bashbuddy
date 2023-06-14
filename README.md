@@ -31,8 +31,10 @@ bashbuddy "<command>"
 You can change the model used by setting the `BASHBUDDY_MODEL` environment variable or setting it in `~/.config/bashbuddy/config.toml`:
 
 ```toml
-model = "gpt-4"  # defaults to gpt-3.5-turbo
+model = "gpt-4-0613"  # defaults to gpt-3.5-turbo-0613
 ```
+
+OpenAI's agent functions are supported, and will automatically be used if one of the `-0613` models is used. From my home testing, it pretty significantly improves capabilities (making `gpt-3.5-turbo` actually useful sometimes).
 
 ## Example
 

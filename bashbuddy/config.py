@@ -1,12 +1,12 @@
-import tomllib
 from pathlib import Path
 
+import tomllib
 from platformdirs import user_config_dir
 from pydantic import BaseSettings
 
 
 class Config(BaseSettings):
-    model: str = "gpt-3.5-turbo"
+    model: str = "gpt-3.5-turbo-0613"
 
     class Config:
         env_prefix = "bashbuddy_"
